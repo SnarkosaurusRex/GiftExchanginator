@@ -93,6 +93,7 @@ import (
  *             were assigned properly
  */
    func assigninator(aGroup *Group, t int) string {
+/**/  fmt.Print("\n---------------------------------------------")
 /**/  fmt.Print("\nBeginning assigninator():  t = ")
 /**/  fmt.Println(t)
      //keep track of who's already been assigned
@@ -110,6 +111,7 @@ import (
 /**/     fmt.Println(len(aGroup.groupMembers[i].validNames))
          if len(aGroup.groupMembers[i].validNames) == 0 {
             if t < 5 {
+/**/           fmt.Println("      no valid names left, trying again...")
                assigninator(aGroup, t+1)
             } else {
                errorMessage := "Uh oh..." + aGroup.groupMembers[i].name + " doesn't have any valid names left to choose from...Try again!"
@@ -137,6 +139,7 @@ import (
          writeResultsFiles(aGroup)
          return "\nAll names have been assigned! Woot!"
       } else if t < 5 {    //try assigninator up to 5 times if needed
+/**/     fmt.Println("FAILED - trying again...")
          assigninator(aGroup, t+1)
       }
       return "\nWhoops, something didn't work quite right...Try again!"
@@ -150,7 +153,7 @@ import (
  */
  func writeResultsFiles(aGroup *Group) {           // ***** NOTE TO SELF: You were working on the contents of this function *****
    for i := range aGroup.groupMembers {
-      fileName := aGroup.groupMembers[i].name + "Assignment" + ".txt"
+      fileName := aGroup.groupName + "-" + aGroup.groupMembers[i].name + "Assignment" + ".txt"
       fout, _ := os.Create(fileName)
       fwriter := bufio.NewWriter(fout)
 

@@ -41,7 +41,9 @@ func menu1(zeGroup *Group) {
       aRoomie = strings.TrimSpace(aRoomie)
 
       addMember(zeGroup, aName, aSigOth, aRoomie)
-      fmt.Println("Member added to the group!")
+      fmt.Println(aName + " has been added to the group!")
+      fmt.Print("Current group members: ")
+      fmt.Println(zeGroup.memberNames)
       menu1(zeGroup)
    } else if choice1 == "2" {
      //get "rules" from user

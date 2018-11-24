@@ -92,7 +92,7 @@ import (
  * Return: a string that indicates whether or not all of the names in the Group
  *             were assigned properly
  */
-   func assigninator(aGroup *Group, t int) string {
+   func assigninator(aGroup *Group, t int, writeFiles bool) string {
 /**/  fmt.Print("\n---------------------------------------------")
 /**/  fmt.Print("\nBeginning assigninator():  t = ")
 /**/  fmt.Println(t)
@@ -100,19 +100,14 @@ import (
       assignedNames := []string{}
 
       for i := range aGroup.groupMembers {
-/**/     fmt.Println("\n  Now assigning " + aGroup.groupMembers[i].name)
          //use assignedNames to remove names from the Person's validNames
          for j := range assignedNames {
             aGroup.groupMembers[i].validNames = removeByString(aGroup.groupMembers[i].validNames, assignedNames[j])
          }
-/**/     fmt.Print("    validNames: ")
-/**/     fmt.Println(aGroup.groupMembers[i].validNames)
-/**/     fmt.Print("     validNames length: ")
-/**/     fmt.Println(len(aGroup.groupMembers[i].validNames))
          if len(aGroup.groupMembers[i].validNames) == 0 {
             if t < 5 {
 /**/           fmt.Println("      no valid names left, trying again...")
-               assigninator(aGroup, t+1)
+               assigninator(aGroup, t+1, writeFiles)
             } else {
                errorMessage := "Uh oh..." + aGroup.groupMembers[i].name + " doesn't have any valid names left to choose from...Try again!"
                return errorMessage
@@ -126,7 +121,6 @@ import (
 
          //assign name at that index to person i
          aGroup.groupMembers[i].assignedName = aGroup.groupMembers[i].validNames[x]
-/**/     fmt.Println("    Assignment: " + aGroup.groupMembers[i].assignedName)
 
          //remove that name from the Group's memberNames
          aGroup.memberNames = removeByString(aGroup.memberNames, aGroup.groupMembers[i].assignedName)
@@ -136,11 +130,13 @@ import (
 
      //check that it worked properly
       if len(aGroup.memberNames) == 0 {
-         writeResultsFiles(aGroup)
+         if writeFiles == true {
+            writeResultsFiles(aGroup)
+         }
          return "\nAll names have been assigned! Woot!"
       } else if t < 5 {    //try assigninator up to 5 times if needed
 /**/     fmt.Println("FAILED - trying again...")
-         assigninator(aGroup, t+1)
+         assigninator(aGroup, t+1, writeFiles)
       }
       return "\nWhoops, something didn't work quite right...Try again!"
    }
@@ -162,19 +158,21 @@ import (
       fwriter.Write(result)
       fwriter.Flush()
    }
+   fmt.Println("Results files written!")
 }
 
 
 /*
  * doStuff() calls the necessary functions to run the whole program
  * Receive: aGroup (*Group)
- *          noSigOths, noRoomies - bools representing the "rules" specified by the user
+ *          noSigOths, noRoomies, writeFiles - bools representing the "rules" specified by the user
  */
-   func doStuff(aGroup *Group, noSigOths, noRoomies bool) {
+   func doStuff(aGroup *Group, noSigOths, noRoomies, writeFiles bool) {
       for i := range aGroup.groupMembers {
          findValidNames(&aGroup.groupMembers[i], aGroup.memberNames, noSigOths, noRoomies)
       }
-      fmt.Println(assigninator(aGroup, 0))
+      var outcome = assigninator(aGroup, 0, writeFiles)
+      fmt.Println(outcome)
    }
 
 

@@ -28,7 +28,8 @@ func main() {
    )
    menu1(&theGroup)
 
-//   runTests()
+
+  // runTests()
 
 }
 
@@ -41,7 +42,7 @@ func main() {
 func runTests() {
   // set-up
    var (
-      testGroup = Group{groupName: "squad"}
+      testGroup = Group{groupName: "InsanitySquad"}
    )
    addMember(&testGroup, "Carolyn", "Ryan", "Lydia")
    addMember(&testGroup, "Lydia", "Thomas", "Carolyn")
@@ -58,14 +59,14 @@ func runTests() {
 
 
   // TEST RUN!!!
-   doStuff(&testGroup, true, true)
+   doStuff(&testGroup, true, true, true)
 
-  // print all results
+/*  // print all results
    for i := range testGroup.groupMembers {
       fmt.Print(testGroup.groupMembers[i].name)
       fmt.Print(" --> ")
       fmt.Println(testGroup.groupMembers[i].assignedName)
-   }
+   }*/
 
 }
 

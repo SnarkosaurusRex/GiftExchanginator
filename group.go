@@ -9,6 +9,8 @@ import (
 	"fmt"
    "math/rand"
    "time"
+   "bufio"
+   "os"
 )
 
 
@@ -90,13 +92,26 @@ import (
  * Return: a string that indicates whether or not all of the names in the Group
  *             were assigned properly
  */
-   func assigninator(aGroup *Group, t int) string {
-      //keep track of who's already been assigned
+   func assigninator(aGroup *Group, t int, writeFiles bool) string {
+/**/  fmt.Print("\n---------------------------------------------")
+/**/  fmt.Print("\nBeginning assigninator():  t = ")
+/**/  fmt.Println(t)
+     //keep track of who's already been assigned
       assignedNames := []string{}
+
       for i := range aGroup.groupMembers {
          //use assignedNames to remove names from the Person's validNames
          for j := range assignedNames {
             aGroup.groupMembers[i].validNames = removeByString(aGroup.groupMembers[i].validNames, assignedNames[j])
+         }
+         if len(aGroup.groupMembers[i].validNames) == 0 {
+            if t < 5 {
+/**/           fmt.Println("      no valid names left, trying again...")
+               assigninator(aGroup, t+1, writeFiles)
+            } else {
+               errorMessage := "Uh oh..." + aGroup.groupMembers[i].name + " doesn't have any valid names left to choose from...Try again!"
+               return errorMessage
+            }
          }
 
          //generate random # to be used as an index
@@ -115,24 +130,49 @@ import (
 
      //check that it worked properly
       if len(aGroup.memberNames) == 0 {
+         if writeFiles == true {
+            writeResultsFiles(aGroup)
+         }
          return "\nAll names have been assigned! Woot!"
       } else if t < 5 {    //try assigninator up to 5 times if needed
-         assigninator(aGroup, t+1)
+/**/     fmt.Println("FAILED - trying again...")
+         assigninator(aGroup, t+1, writeFiles)
       }
       return "\nWhoops, something didn't work quite right...Try again!"
    }
 
 
 /*
+ *  writeResultsFiles() outputs each group member's result to a file that can then
+ *       be emailed to that person as an attachment without anyone else seeing it
+ *  Receive: aGroup (*Group)
+ */
+ func writeResultsFiles(aGroup *Group) {           // ***** NOTE TO SELF: You were working on the contents of this function *****
+   for i := range aGroup.groupMembers {
+      fileName := aGroup.groupName + "-" + aGroup.groupMembers[i].name + "Assignment" + ".txt"
+      fout, _ := os.Create(fileName)
+      fwriter := bufio.NewWriter(fout)
+
+      stResult := ", you have been assigned " + aGroup.groupMembers[i].assignedName
+      result := append([]byte(aGroup.groupMembers[i].name), stResult...)
+      fwriter.Write(result)
+      fwriter.Flush()
+   }
+   fmt.Println("Results files written!")
+}
+
+
+/*
  * doStuff() calls the necessary functions to run the whole program
  * Receive: aGroup (*Group)
- *          noSigOths, noRoomies - bools representing the "rules" specified by the user
+ *          noSigOths, noRoomies, writeFiles - bools representing the "rules" specified by the user
  */
-   func doStuff(aGroup *Group, noSigOths, noRoomies bool) {
+   func doStuff(aGroup *Group, noSigOths, noRoomies, writeFiles bool) {
       for i := range aGroup.groupMembers {
          findValidNames(&aGroup.groupMembers[i], aGroup.memberNames, noSigOths, noRoomies)
       }
-      fmt.Println(assigninator(aGroup, 0))
+      var outcome = assigninator(aGroup, 0, writeFiles)
+      fmt.Println(outcome)
    }
 
 

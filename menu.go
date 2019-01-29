@@ -21,8 +21,9 @@ func menu1(zeGroup *Group) {
    reader := bufio.NewReader(os.Stdin)
 
    fmt.Println("\nOptions:")
-   fmt.Println("1 - add a member to the group")
-   fmt.Println("2 - run!")
+   fmt.Println(" 1 - add a member to the group")
+   fmt.Println(" 2 - run!")
+   fmt.Println("(3 - run using the Insanity Squad)")
    fmt.Print("Your choice: ")
    choice1, _ := reader.ReadString('\n')
    choice1 = strings.TrimSpace(choice1)
@@ -41,11 +42,13 @@ func menu1(zeGroup *Group) {
       aRoomie = strings.TrimSpace(aRoomie)
 
       addMember(zeGroup, aName, aSigOth, aRoomie)
-      fmt.Println("Member added to the group!")
+      fmt.Println(aName + " has been added to the group!")
+      fmt.Print("Current group members: ")
+      fmt.Println(zeGroup.memberNames)
       menu1(zeGroup)
    } else if choice1 == "2" {
      //get "rules" from user
-      var noBfGfs, noRoommates bool
+      var noBfGfs, noRoommates, writeFiles bool
 
       fmt.Print("\nAllow boyfriends/girlfriends? (y or n) ")
       choice2a, _ := reader.ReadString('\n')
@@ -55,6 +58,7 @@ func menu1(zeGroup *Group) {
       } else {
          noBfGfs = true
       }
+      
       fmt.Print("\nAllow roommates? (y or n) ")
       choice2b, _ := reader.ReadString('\n')
       choice2b = strings.TrimSpace(choice2b)
@@ -64,9 +68,21 @@ func menu1(zeGroup *Group) {
          noRoommates = true
       }
 
+      fmt.Print("\nWould you like to write results files? (y or n) ")
+      choice2c, _ := reader.ReadString('\n')
+      choice2c = strings.TrimSpace(choice2c)
+      if choice2c == "y" {
+         writeFiles = true
+      } else {
+         writeFiles = false
+      }
+
      //run the exchange-inator
-      doStuff(zeGroup, noBfGfs, noRoommates)
+      doStuff(zeGroup, noBfGfs, noRoommates, writeFiles)
      //proceed to the results menu
+      menu2(zeGroup)
+   } else if choice1 == "3" {
+      runTests()
       menu2(zeGroup)
    }
 }

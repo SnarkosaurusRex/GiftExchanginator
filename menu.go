@@ -1,4 +1,7 @@
 /* menu.go provides interactive menus for the Gift Exchange-inator
+ *    (Note: had to go with command line interfaces due to an abundance of
+ *       dependency issues with GUI libraries that I spent most of a night
+ *       attempting to resolve before finally deciding it wasn't worth the time)
  * Author: Lydia Holtrop
  * CS 214 final project, Spring 2017
  */

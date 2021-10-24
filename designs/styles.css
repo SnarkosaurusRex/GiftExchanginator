@@ -1,0 +1,71 @@
+.wrapper {
+    padding: 20px;
+}
+
+.top {
+    margin: 0 auto 30px;
+    text-align: center;
+    width: 80%;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
+}
+
+.box {
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.group-member {
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.member-details {
+    margin-left: 40px;
+}
+
+.details-row {
+    display: block;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.right-side {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.add-person-section {
+    margin-bottom: 20px;
+}
+
+.add-person-section label {
+    margin: 5px 0;
+}
+
+label {
+    display: block;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.run-button {
+    width: 60%;
+}

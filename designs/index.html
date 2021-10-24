@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gift Exchanginator</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <h1>Welcome to the Gift Exchanginator!</h1>
+            <span>Informational blurb (probably in the form of a short paragraph) about how this works will go here.</span>
+        </div>
+        <div class="main">
+            <div class="left-side box">
+                <h2>Group Members:</h2>
+                <div class="group-member box">
+                    <span class="name">Fred</span>
+                    <div class="member-details">
+                        <span class="details-row"><span class="label">Email: </span>fred@fred.fred</span>
+                        <span class="details-row"><span class="label">Roommate: </span>George</span>
+                        <span class="details-row"><span class="label">Significant Other: </span>Fiona</span>
+                    </div>
+                </div>
+                <div class="group-member box">
+                    <span class="name">George</span>
+                    <div class="member-details">
+                        <span class="details-row"><span class="label">Email: </span>george@george.george</span>
+                        <span class="details-row"><span class="label">Roommate: </span>Fred</span>
+                        <span class="details-row"><span class="label">Significant Other: </span>Gertrude</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side">
+                <div class="add-person-section box">
+                    <h2>Add Person:</h2>
+                    <label>Name <input type="text" name="name"></label>
+                    <label>Email Address <input type="email" name="email"></label>
+                    <label>Roommate <input type="text" name="roommate"></label>
+                    <label>Significant Other <input type="text" name="significant other"></label>
+                    <button class="add-person-button">Add Person</button>
+                </div>
+
+                <div class="options box">
+                    <h3>Options:</h3>
+                    <label><input type="checkbox" name="allow roommates"> Allow roommates</label>
+                    <label><input type="checkbox" name="allow significant others"> Allow significant others</label>
+                    <label><input type="checkbox" name="send result emails"> Send result emails</label>
+                    <label><input type="checkbox" name="output result files"> Output result files</label>
+                </div>
+
+                <button class="run-button">Run!</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

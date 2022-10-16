@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./designs:/usr/share/nginx/html
+
+  backend:
+    build: ./backend

@@ -6,10 +6,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-   "bufio"
-   "os"
-   "strings"
+	"os"
+	"strings"
 )
 
 /*
@@ -17,15 +17,14 @@ import (
  *    establish a new Group, then calls the first interactive menu
  */
 func main() {
-   reader := bufio.NewReader(os.Stdin)
+	reader := bufio.NewReader(os.Stdin)
 
-   fmt.Println("\nWelcome to the Gift Exchange-inator!")
-   fmt.Print("Enter a group name: ")
-   gpName, _ := reader.ReadString('\n')
-   gpName = strings.TrimSpace(gpName)
-   var (
-      theGroup = Group{groupName: gpName}
-   )
-   menu1(&theGroup)
+	fmt.Println("\nWelcome to the Gift Exchange-inator!")
+	fmt.Print("Enter a group name: ")
+	gpName, _ := reader.ReadString('\n')
+	gpName = strings.TrimSpace(gpName)
+	var (
+		theGroup = Group{groupName: gpName}
+	)
+	menu1(&theGroup)
 }
-

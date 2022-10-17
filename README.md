@@ -13,3 +13,7 @@ Currently, the GiftExchanginator has a very nice command line interface that fir
 * Add some parallelization (it _is_ written in Go, after all)
 * Come up with a way of detecting if no valid results are possible for the given group and alerting users accordingly
 * Add an option to prevent "loops" (e.g. two people being assigned to each other)
+
+## How to run it:
+To run the GiftExchanginator, run the following command in a Terminal window in the root directory of this project:
+`go run main.go menu.go person.go group.go`

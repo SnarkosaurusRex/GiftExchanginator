@@ -85,7 +85,6 @@ func menu1(zeGroup *Group) {
      //proceed to the results menu
       menu2(zeGroup)
    } else if choice1 == "3" {
-      runTests()
       menu2(zeGroup)
    }
 }
